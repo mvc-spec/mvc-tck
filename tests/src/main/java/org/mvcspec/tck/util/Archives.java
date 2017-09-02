@@ -44,7 +44,15 @@ public class Archives {
 
         BaseArchiveProvider provider = Reflection.createInstance(implClass);
 
-        return provider.getBaseArchive();
+        try {
+
+            return provider.getBaseArchive();
+
+        } catch (RuntimeException e) {
+            // make sure that errors are logged to the console when running the tests
+            e.printStackTrace();
+            throw e;
+        }
 
     }
 

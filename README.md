@@ -23,6 +23,6 @@ Start Glassfish:
 Now execute the sample runner to run the tests against Ozark deployed to Glassfish:
 
     cd <TCK_HOME>/sample/
-    mvn clean install
+    mvn clean test
     
-Of cause all the tests should pass. :-)
+Of course all the tests should pass. :-)

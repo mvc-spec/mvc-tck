@@ -30,8 +30,9 @@ public class OzarkGlassfishProvider implements BaseArchiveProvider {
         // TODO: Can we get the versions from the pom?
         File[] dependencies = Maven.resolver()
                 .resolve(
-                        "javax.mvc:javax.mvc-api:1.0-edr2",
-                        "org.glassfish.ozark:ozark:1.0.0-m02"
+                        "javax.mvc:javax.mvc-api:1.0-pr",
+                        "org.mvc-spec.ozark:ozark-core:1.0.0-m03",
+                        "org.mvc-spec.ozark:ozark-jersey:1.0.0-m03"
                 )
                 .withoutTransitivity()
                 .asFile();

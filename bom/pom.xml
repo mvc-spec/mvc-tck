@@ -49,7 +49,7 @@
             <dependency>
                 <groupId>javax.mvc</groupId>
                 <artifactId>javax.mvc-api</artifactId>
-                <version>1.0-edr2</version>
+                <version>1.0-pr</version>
             </dependency>
 
             <dependency>

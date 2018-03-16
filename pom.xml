@@ -34,7 +34,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
-        <jboss.test.audit.version>1.1.5-SNAPSHOT</jboss.test.audit.version>
+        <jboss.test.audit.version>1.1.4.Final</jboss.test.audit.version>
     </properties>
 
     <licenses>

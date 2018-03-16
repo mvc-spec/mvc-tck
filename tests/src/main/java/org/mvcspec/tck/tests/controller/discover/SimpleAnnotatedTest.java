@@ -25,12 +25,18 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mvcspec.tck.mvcspec.Sections;
 import org.mvcspec.tck.util.Archives;
 
 import java.io.IOException;
 import java.net.URL;
 
+import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecVersion;
+
+
 @RunWith(Arquillian.class)
+@SpecVersion(spec = "mvcspec", version = "1.0.0")
 public class SimpleAnnotatedTest {
 
     @ArquillianResource
@@ -45,6 +51,8 @@ public class SimpleAnnotatedTest {
     }
 
     @Test
+    // Spec assertions to measure TCK coverage can be added like this (see mvc-spec project):
+    @SpecAssertion(section = Sections.LIST_OF_ASSERTIONS, id = "Controller_Annotation")
     public void shouldDoStuff() throws IOException {
 
         Page page = new WebClient()

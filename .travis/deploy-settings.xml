@@ -14,8 +14,17 @@
             <id>jboss-releases</id>
             <repositories>
                 <repository>
+                    <id>sonatype-oss-snapshots</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
                     <id>jboss-releases</id>
-                    <name>JBoss Releases</name>
                     <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
                     <releases>
                         <enabled>true</enabled>
@@ -28,7 +37,6 @@
             <pluginRepositories>
                 <pluginRepository>
                     <id>jboss-releases</id>
-                    <name>JBoss Releases</name>
                     <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
                     <releases>
                         <enabled>true</enabled>

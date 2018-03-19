@@ -22,6 +22,8 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecVersion;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,6 +33,7 @@ import java.io.IOException;
 import java.net.URL;
 
 @RunWith(Arquillian.class)
+@SpecVersion(spec = "mvc", version = "1.0")
 public class SimpleAnnotatedTest {
 
     @ArquillianResource
@@ -45,6 +48,7 @@ public class SimpleAnnotatedTest {
     }
 
     @Test
+    @SpecAssertion(section = "list-of-assertions", id = "Controller_Annotation")
     public void shouldDoStuff() throws IOException {
 
         Page page = new WebClient()

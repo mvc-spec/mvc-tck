@@ -30,6 +30,10 @@
     <name>JSR 371 TCK - Tests</name>
     <description>Technology Compatibility Kit for JSR 371</description>
 
+    <properties>
+        <test.audit.version>1.1.4.Final</test.audit.version>
+    </properties>
+
     <dependencies>
 
         <dependency>
@@ -65,6 +69,12 @@
             <artifactId>htmlunit</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.jboss.test-audit</groupId>
+            <artifactId>jboss-test-audit-api</artifactId>
+            <version>${test.audit.version}</version>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
@@ -78,5 +88,84 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <profiles>
+
+        <!-- Create the TCK audit report -->
+        <profile>
+            <id>coverage-report</id>
+            <activation>
+                <property>
+                    <name>coverage-report</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+
+                    <!-- Fetch the tck-audit.xml from the Maven repo -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>copy-audit-xml</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>javax.mvc</groupId>
+                                    <artifactId>javax.mvc-api</artifactId>
+                                    <type>xml</type>
+                                    <classifier>audit</classifier>
+                                    <overWrite>false</overWrite>
+                                    <outputDirectory>${project.build.directory}/tck-audit/</outputDirectory>
+                                    <destFileName>tck-audit.xml</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </plugin>
+
+                    <!-- Generate the report -->
+                    <plugin>
+                        <groupId>org.bsc.maven</groupId>
+                        <artifactId>maven-processor-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>generate-audit-report</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>process</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <addCompileSourceRoots>true</addCompileSourceRoots>
+                            <processors>
+                                <processor>org.jboss.test.audit.report.CoverageProcessor</processor>
+                            </processors>
+                            <compilerArguments>
+                                -AauditXml=${project.build.directory}/tck-audit/tck-audit.xml
+                                -AoutputDir=${project.build.directory}/coverage-report/
+                                -source ${maven.compiler.source}
+                                -target ${maven.compiler.target}
+                            </compilerArguments>
+                        </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.jboss.test-audit</groupId>
+                                <artifactId>jboss-test-audit-impl</artifactId>
+                                <version>${test.audit.version}</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

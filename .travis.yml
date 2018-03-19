@@ -1,10 +1,10 @@
 language: java
 jdk: oraclejdk8
 script:
-  - mvn -B clean install
+  - mvn -B -s .travis/deploy-settings.xml -Dcoverage-report clean install
 deploy:
   provider: script
-  script: mvn -s .travis/deploy-settings.xml -DperformRelease -DskipTests -Dgpg.skip=true deploy
+  script: mvn -B -s .travis/deploy-settings.xml -DperformRelease -DskipTests -Dgpg.skip=true deploy
   skip_cleanup: true
   on:
     repo: mvc-spec/mvc-tck

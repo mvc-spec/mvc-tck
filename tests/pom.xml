@@ -30,6 +30,10 @@
     <name>JSR 371 TCK - Tests</name>
     <description>Technology Compatibility Kit for JSR 371</description>
 
+    <properties>
+        <test.audit.version>1.1.4.Final</test.audit.version>
+    </properties>
+
     <dependencies>
 
         <dependency>
@@ -68,6 +72,7 @@
         <dependency>
             <groupId>org.jboss.test-audit</groupId>
             <artifactId>jboss-test-audit-api</artifactId>
+            <version>${test.audit.version}</version>
         </dependency>
 
     </dependencies>
@@ -84,128 +89,83 @@
         </dependencies>
     </dependencyManagement>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>generate-sections-class</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>java</goal>
-                        </goals>
+    <profiles>
+
+        <!-- Create the TCK audit report -->
+        <profile>
+            <id>coverage-report</id>
+            <activation>
+                <property>
+                    <name>coverage-report</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+
+                    <!-- Fetch the tck-audit.xml from the Maven repo -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>copy-audit-xml</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                         <configuration>
-                            <mainClass>org.jboss.test.audit.generate.SectionsClassGenerator</mainClass>
-                            <arguments>
-                                <!-- auditFilePath -->
-                                <argument>${basedir}/src/main/resources/tck-audit.xml</argument>
-                                <!-- packageBase -->
-                                <argument>org.mvcspec.tck</argument>
-                                <!-- outputDirPath -->
-                                <argument>${basedir}/target/generated-sources/audit</argument>
-                            </arguments>
-                            <includePluginDependencies>true</includePluginDependencies>
-                        </configuration>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.jboss.test-audit</groupId>
-                        <artifactId>jboss-test-audit-impl</artifactId>
-                        <version>${jboss.test.audit.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>add-source</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>target/generated-sources/audit</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>attach-artifacts</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>attach-artifact</goal>
-                        </goals>
-                        <configuration>
-                            <artifacts>
-                                <artifact>
-                                    <file>${basedir}/src/main/resources/tck-audit.xml</file>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>javax.mvc</groupId>
+                                    <artifactId>javax.mvc-api</artifactId>
                                     <type>xml</type>
                                     <classifier>audit</classifier>
-                                </artifact>
-                                <artifact>
-                                    <file>${basedir}/target/coverage-report/coverage-mvcspec.html</file>
-                                    <type>html</type>
-                                    <classifier>coverage</classifier>
-                                </artifact>
-                            </artifacts>
+                                    <overWrite>false</overWrite>
+                                    <outputDirectory>${project.build.directory}/tck-audit/</outputDirectory>
+                                    <destFileName>tck-audit.xml</destFileName>
+                                </artifactItem>
+                            </artifactItems>
                         </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <compilerArgument>-proc:none</compilerArgument>
-                    <compilerArgument>-parameters</compilerArgument>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.bsc.maven</groupId>
-                <artifactId>maven-processor-plugin</artifactId>
-                <configuration>
-                    <defaultOutputDirectory>${basedir}/target/coverage-report</defaultOutputDirectory>
-                    <addCompileSourceRoots>true</addCompileSourceRoots>
-                    <processors>
-                        <processor>org.jboss.test.audit.report.CoverageProcessor</processor>
-                    </processors>
-                    <compilerArguments>-AauditXml=${basedir}/src/main/resources/tck-audit.xml
-                        -AoutputDir=${basedir}/target/coverage-report -source ${maven.compiler.source}
-                        -target ${maven.compiler.target}
-                    </compilerArguments>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>process</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>process</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.jboss.test-audit</groupId>
-                        <artifactId>jboss-test-audit-impl</artifactId>
-                        <version>${jboss.test.audit.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
-                <configuration>
-                    <systemProperties>
-                        <org.mvcspec.tck.api.BaseArchiveProvider>
-                            org.mvcspec.tck.runner.OzarkGlassfishProvider
-                        </org.mvcspec.tck.api.BaseArchiveProvider>
-                    </systemProperties>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+                    </plugin>
+
+                    <!-- Generate the report -->
+                    <plugin>
+                        <groupId>org.bsc.maven</groupId>
+                        <artifactId>maven-processor-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>generate-audit-report</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>process</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <addCompileSourceRoots>true</addCompileSourceRoots>
+                            <processors>
+                                <processor>org.jboss.test.audit.report.CoverageProcessor</processor>
+                            </processors>
+                            <compilerArguments>
+                                -AauditXml=${project.build.directory}/tck-audit/tck-audit.xml
+                                -AoutputDir=${project.build.directory}/coverage-report/
+                                -source ${maven.compiler.source}
+                                -target ${maven.compiler.target}
+                            </compilerArguments>
+                        </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.jboss.test-audit</groupId>
+                                <artifactId>jboss-test-audit-impl</artifactId>
+                                <version>${test.audit.version}</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 </project>

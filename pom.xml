@@ -33,8 +33,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-
-        <jboss.test.audit.version>1.1.4.Final</jboss.test.audit.version>
     </properties>
 
     <licenses>
@@ -82,21 +80,6 @@
         </developer>
     </developers>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.jboss.test-audit</groupId>
-                <artifactId>jboss-test-audit-api</artifactId>
-                <version>${jboss.test.audit.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.test-audit</groupId>
-                <artifactId>jboss-test-audit-impl</artifactId>
-                <version>${jboss.test.audit.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <build>
 
         <plugins>
@@ -141,23 +124,13 @@
                     <version>2.19.1</version>
                 </plugin>
                 <plugin>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>3.0.2</version>
+                </plugin>
+                <plugin>
                     <groupId>org.bsc.maven</groupId>
                     <artifactId>maven-processor-plugin</artifactId>
                     <version>3.1.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>exec-maven-plugin</artifactId>
-                    <version>1.5.0</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.6.1</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>1.12</version>
                 </plugin>
             </plugins>
         </pluginManagement>

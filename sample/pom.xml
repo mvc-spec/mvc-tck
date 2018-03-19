@@ -20,12 +20,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.mvc-spec.tck</groupId>
-        <artifactId>mvc-tck-parent</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
-
     <groupId>org.mvc-spec.tck</groupId>
     <artifactId>mvc-tck-sample</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -53,118 +47,6 @@
                     </systemProperties>
                 </configuration>
             </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>generate-sections-class</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>java</goal>
-                        </goals>
-                        <configuration>
-                            <mainClass>org.jboss.test.audit.generate.SectionsClassGenerator</mainClass>
-                            <arguments>
-                                <!-- auditFilePath -->
-                                <argument>${basedir}/../tests/src/main/resources/tck-audit.xml</argument>
-                                <!-- packageBase -->
-                                <argument>org.mvcspec.tck</argument>
-                                <!-- outputDirPath -->
-                                <argument>${basedir}/target/generated-sources/audit</argument>
-                            </arguments>
-                            <includePluginDependencies>true</includePluginDependencies>
-                        </configuration>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.jboss.test-audit</groupId>
-                        <artifactId>jboss-test-audit-impl</artifactId>
-                        <version>${jboss.test.audit.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>add-source</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>${basedir}/target/generated-sources/audit</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>attach-artifacts</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>attach-artifact</goal>
-                        </goals>
-                        <configuration>
-                            <artifacts>
-                                <artifact>
-                                    <file>${basedir}/src/main/resources/tck-audit.xml</file>
-                                    <type>xml</type>
-                                    <classifier>audit</classifier>
-                                </artifact>
-                                <artifact>
-                                    <file>${basedir}/target/coverage-report/coverage-mvcspec.html</file>
-                                    <type>html</type>
-                                    <classifier>coverage</classifier>
-                                </artifact>
-                            </artifacts>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <compilerArgument>-proc:none</compilerArgument>
-                    <compilerArgument>-parameters</compilerArgument>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.bsc.maven</groupId>
-                <artifactId>maven-processor-plugin</artifactId>
-                <configuration>
-                    <defaultOutputDirectory>${basedir}/target/coverage-report</defaultOutputDirectory>
-                    <addCompileSourceRoots>true</addCompileSourceRoots>
-                    <sourceDirectory>${basedir}/../tests/src/main/java</sourceDirectory>
-                    <processors>
-                        <processor>org.jboss.test.audit.report.CoverageProcessor</processor>
-                    </processors>
-                    <compilerArguments>-AauditXml=${basedir}/../tests/src/main/resources/tck-audit.xml
-                        -AoutputDir=${basedir}/target/coverage-report -source ${maven.compiler.source}
-                        -target ${maven.compiler.target}
-                    </compilerArguments>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>process</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>process</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.jboss.test-audit</groupId>
-                        <artifactId>jboss-test-audit-impl</artifactId>
-                        <version>${jboss.test.audit.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-
         </plugins>
     </build>
 
@@ -182,28 +64,6 @@
         </dependency>
 
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>7.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>net.sourceforge.htmlunit</groupId>
-            <artifactId>htmlunit</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.mvc</groupId>
-            <artifactId>javax.mvc-api</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.jboss.arquillian.container</groupId>
             <artifactId>arquillian-glassfish-remote-3.1</artifactId>
             <version>1.0.0.Final</version>
@@ -215,11 +75,6 @@
             <artifactId>shrinkwrap-resolver-depchain</artifactId>
             <scope>compile</scope>
             <type>pom</type>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.test-audit</groupId>
-            <artifactId>jboss-test-audit-api</artifactId>
         </dependency>
 
     </dependencies>

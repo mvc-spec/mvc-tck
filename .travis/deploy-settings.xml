@@ -9,4 +9,40 @@
         </server>
     </servers>
 
+    <profiles>
+        <profile>
+            <id>jboss-releases</id>
+            <repositories>
+                <repository>
+                    <id>jboss-releases</id>
+                    <name>JBoss Releases</name>
+                    <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>jboss-releases</id>
+                    <name>JBoss Releases</name>
+                    <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+
+    <activeProfiles>
+        <activeProfile>jboss-releases</activeProfile>
+    </activeProfiles>
+
 </settings>

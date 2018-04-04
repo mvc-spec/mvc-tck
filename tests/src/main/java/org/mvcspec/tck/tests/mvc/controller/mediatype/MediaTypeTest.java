@@ -58,19 +58,33 @@ public class MediaTypeTest {
     @SpecAssertion(section = Sections.MVC_CONTROLLERS, id = "default-mediatype")
     public void defaultMediaType() throws IOException {
 
-        WebClient client = new WebClient();
+        WebResponse response = new WebClient()
+                .getPage(baseUrl.toString() + "mvc/mediatype/default")
+                .getWebResponse();
 
         // default content-type of text/html
-        WebResponse response1 = client.getPage(baseUrl.toString() + "mvc/mediatype/default").getWebResponse();
-        assertThat(response1.getStatusCode(), equalTo(200));
-        assertThat(response1.getContentType(), equalTo("text/html"));
-        assertThat(response1.getContentAsString(), containsString("Some rendered view"));
+        assertThat(response.getStatusCode(), equalTo(200));
+        assertThat(response.getContentType(), equalTo("text/html"));
+        assertThat(response.getContentAsString(), containsString("Some rendered view"));
+
+    }
+
+    /**
+     * Moreover, the default media type for a response is assumed to be text/html, but otherwise can be declared
+     * using @Produces just like in JAX-RS
+     */
+    @Test
+    @SpecAssertion(section = Sections.MVC_CONTROLLERS, id = "default-mediatype")
+    public void customMediaType() throws IOException {
+
+        WebResponse response = new WebClient()
+                .getPage(baseUrl.toString() + "mvc/mediatype/custom")
+                .getWebResponse();
 
         // custom content-type of text/plain
-        WebResponse response2 = client.getPage(baseUrl.toString() + "mvc/mediatype/custom").getWebResponse();
-        assertThat(response2.getStatusCode(), equalTo(200));
-        assertThat(response2.getContentType(), equalTo("text/plain"));
-        assertThat(response2.getContentAsString(), containsString("Some rendered view"));
+        assertThat(response.getStatusCode(), equalTo(200));
+        assertThat(response.getContentType(), equalTo("text/plain"));
+        assertThat(response.getContentAsString(), containsString("Some rendered view"));
 
     }
 

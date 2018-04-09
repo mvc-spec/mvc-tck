@@ -27,7 +27,6 @@ import javax.ws.rs.QueryParam;
 
 @Controller
 @Path("inject")
-@RequestScoped
 public class InjectParamsController {
 
     @Inject

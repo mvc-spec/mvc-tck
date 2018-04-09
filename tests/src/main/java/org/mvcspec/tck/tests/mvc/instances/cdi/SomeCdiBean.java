@@ -15,9 +15,6 @@
  */
 package org.mvcspec.tck.tests.mvc.instances.cdi;
 
-import javax.enterprise.context.Dependent;
-
-@Dependent
 public class SomeCdiBean {
 
     public String getText() {

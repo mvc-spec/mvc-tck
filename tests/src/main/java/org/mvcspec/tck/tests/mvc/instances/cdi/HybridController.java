@@ -15,7 +15,6 @@
  */
 package org.mvcspec.tck.tests.mvc.instances.cdi;
 
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.mvc.Models;
 import javax.mvc.annotation.Controller;
@@ -23,7 +22,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 @Path("hybrid")
-@RequestScoped
 public class HybridController {
 
     @Inject

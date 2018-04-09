@@ -26,7 +26,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Controller
 @Path("lifecycle/request")
-@RequestScoped // TODO: Should check the default, but will require custom beans.xml
 public class LifecycleController {
 
     private static AtomicInteger sequence = new AtomicInteger(0);

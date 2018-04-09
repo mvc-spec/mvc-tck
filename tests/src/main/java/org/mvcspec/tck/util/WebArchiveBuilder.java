@@ -17,9 +17,10 @@ package org.mvcspec.tck.util;
 
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.Asset;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 
 public class WebArchiveBuilder {
 
@@ -53,8 +54,16 @@ public class WebArchiveBuilder {
         return this.addView(new StringAsset(value), name);
     }
 
-    public WebArchiveBuilder addEmptyBeansXml() {
-        archive.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+    public WebArchiveBuilder addBeansXml(String discoveryMode) {
+        return addBeansXml(
+                Descriptors.create(BeansDescriptor.class)
+                        .addDefaultNamespaces()
+                        .beanDiscoveryMode(discoveryMode)
+        );
+    }
+
+    public WebArchiveBuilder addBeansXml(BeansDescriptor descriptor) {
+        archive.addAsWebInfResource(new StringAsset(descriptor.exportAsString()), "beans.xml");
         return this;
     }
 

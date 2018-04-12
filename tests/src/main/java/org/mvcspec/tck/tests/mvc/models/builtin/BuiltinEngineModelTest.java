@@ -22,6 +22,7 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -64,7 +65,12 @@ public class BuiltinEngineModelTest {
      * CDI models can be accessed from a JSP view
      */
     @Test
-    @SpecAssertion(section = Sections.MVC_MODELS, id = "buildin-both-models")
+    @SpecAssertions({
+            @SpecAssertion(section = Sections.MVC_MODELS, id = "buildin-both-models"),
+            @SpecAssertion(section = Sections.MVC_MODELS, id = "cdi-model-inject"),
+            @SpecAssertion(section = Sections.MVC_MODELS, id = "cdi-model-el"),
+            @SpecAssertion(section = Sections.MVC_VIEWS, id = "jsp-el")
+    })
     public void cdiModelJsp() throws IOException {
 
         WebResponse response = new WebClient()
@@ -80,7 +86,11 @@ public class BuiltinEngineModelTest {
      * javax.mvc.Models can be accessed from a JSP view
      */
     @Test
-    @SpecAssertion(section = Sections.MVC_MODELS, id = "buildin-both-models")
+    @SpecAssertions({
+            @SpecAssertion(section = Sections.MVC_MODELS, id = "buildin-both-models"),
+            @SpecAssertion(section = Sections.MVC_MODELS, id = "models-inject"),
+            @SpecAssertion(section = Sections.MVC_VIEWS, id = "jsp-el")
+    })
     public void mvcModelsJsp() throws IOException {
 
         WebResponse response = new WebClient()
@@ -96,7 +106,11 @@ public class BuiltinEngineModelTest {
      * CDI models can be accessed from a Facelets view
      */
     @Test
-    @SpecAssertion(section = Sections.MVC_MODELS, id = "buildin-both-models")
+    @SpecAssertions({
+            @SpecAssertion(section = Sections.MVC_MODELS, id = "buildin-both-models"),
+            @SpecAssertion(section = Sections.MVC_MODELS, id = "cdi-model-inject"),
+            @SpecAssertion(section = Sections.MVC_MODELS, id = "cdi-model-el")
+    })
     public void cdiModelFacelets() throws IOException {
 
         WebResponse response = new WebClient()
@@ -112,7 +126,10 @@ public class BuiltinEngineModelTest {
      * javax.mvc.Models can be accessed from a Facelets view
      */
     @Test
-    @SpecAssertion(section = Sections.MVC_MODELS, id = "buildin-both-models")
+    @SpecAssertions({
+            @SpecAssertion(section = Sections.MVC_MODELS, id = "buildin-both-models"),
+            @SpecAssertion(section = Sections.MVC_MODELS, id = "models-inject")
+    })
     public void mvcModelsFacelets() throws IOException {
 
         WebResponse response = new WebClient()

@@ -67,7 +67,6 @@ public class SendRedirectTest {
      */
     @Test
     @SpecAssertion(section = Sections.MVC_REDIRECT, id = "redirect-response")
-//            @SpecAssertion(section = Sections.MVC_REDIRECT, id = "redirect-relative")
     public void redirectViaResponse() throws IOException {
 
         WebResponse response = webClient

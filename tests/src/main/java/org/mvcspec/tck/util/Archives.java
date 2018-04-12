@@ -27,6 +27,7 @@ public class Archives {
 
     public static WebArchiveBuilder getMvcArchive() {
         return getBaseArchive()
+                .withEmptyFaceConfig()
                 .addClasses(DefaultApplication.class)
                 .addBeansXml("all");
     }

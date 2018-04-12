@@ -17,6 +17,7 @@ package org.mvcspec.tck.util;
 
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.Asset;
+import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
@@ -64,6 +65,11 @@ public class WebArchiveBuilder {
 
     public WebArchiveBuilder addBeansXml(BeansDescriptor descriptor) {
         archive.addAsWebInfResource(new StringAsset(descriptor.exportAsString()), "beans.xml");
+        return this;
+    }
+
+    public WebArchiveBuilder withEmptyFaceConfig() {
+        archive.addAsWebInfResource(EmptyAsset.INSTANCE, "faces-config.xml");
         return this;
     }
 

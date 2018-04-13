@@ -66,7 +66,7 @@ public class BuiltinEngineModelTest {
      */
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = Sections.MVC_MODELS, id = "buildin-both-models"),
+            @SpecAssertion(section = Sections.MVC_MODELS, id = "builtin-both-models"),
             @SpecAssertion(section = Sections.MVC_MODELS, id = "cdi-model-inject"),
             @SpecAssertion(section = Sections.MVC_MODELS, id = "cdi-model-el"),
             @SpecAssertion(section = Sections.MVC_VIEWS, id = "jsp-el")
@@ -87,7 +87,7 @@ public class BuiltinEngineModelTest {
      */
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = Sections.MVC_MODELS, id = "buildin-both-models"),
+            @SpecAssertion(section = Sections.MVC_MODELS, id = "builtin-both-models"),
             @SpecAssertion(section = Sections.MVC_MODELS, id = "models-inject"),
             @SpecAssertion(section = Sections.MVC_VIEWS, id = "jsp-el")
     })
@@ -107,7 +107,7 @@ public class BuiltinEngineModelTest {
      */
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = Sections.MVC_MODELS, id = "buildin-both-models"),
+            @SpecAssertion(section = Sections.MVC_MODELS, id = "builtin-both-models"),
             @SpecAssertion(section = Sections.MVC_MODELS, id = "cdi-model-inject"),
             @SpecAssertion(section = Sections.MVC_MODELS, id = "cdi-model-el")
     })
@@ -127,7 +127,7 @@ public class BuiltinEngineModelTest {
      */
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = Sections.MVC_MODELS, id = "buildin-both-models"),
+            @SpecAssertion(section = Sections.MVC_MODELS, id = "builtin-both-models"),
             @SpecAssertion(section = Sections.MVC_MODELS, id = "models-inject")
     })
     public void mvcModelsFacelets() throws IOException {

@@ -87,7 +87,7 @@ public class UriBuildingTest {
      * Set path parameter via map
      */
     @Test
-    @SpecAssertion(section = Sections.MVC_BUILDING_URIS, id = "tck-id-map")
+    @SpecAssertion(section = Sections.MVC_BUILDING_URIS, id = "param-map")
     public void mapPathParam() throws IOException {
 
         HtmlPage page = new WebClient()
@@ -105,7 +105,7 @@ public class UriBuildingTest {
      * Set query parameter via map
      */
     @Test
-    @SpecAssertion(section = Sections.MVC_BUILDING_URIS, id = "tck-id-map")
+    @SpecAssertion(section = Sections.MVC_BUILDING_URIS, id = "param-map")
     public void mapQueryParam() throws IOException {
 
         HtmlPage page = new WebClient()
@@ -123,7 +123,7 @@ public class UriBuildingTest {
      * Set matrix parameter via map
      */
     @Test
-    @SpecAssertion(section = Sections.MVC_BUILDING_URIS, id = "tck-id-map")
+    @SpecAssertion(section = Sections.MVC_BUILDING_URIS, id = "param-map")
     public void mapMatrixParam() throws IOException {
 
         HtmlPage page = new WebClient()

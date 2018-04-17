@@ -17,11 +17,11 @@ package org.mvcspec.tck.util;
 
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.Asset;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.descriptor.api.facesconfig22.WebFacesConfigDescriptor;
 
 public class WebArchiveBuilder {
 
@@ -69,8 +69,14 @@ public class WebArchiveBuilder {
     }
 
     public WebArchiveBuilder withEmptyFaceConfig() {
-        archive.addAsWebInfResource(EmptyAsset.INSTANCE, "faces-config.xml");
+
+        // empty JSF 2.2 descriptor
+        WebFacesConfigDescriptor descriptor = Descriptors.create(WebFacesConfigDescriptor.class)
+                .addDefaultNamespaces();
+
+        archive.addAsWebInfResource(new StringAsset(descriptor.exportAsString()), "faces-config.xml");
         return this;
+
     }
 
     public WebArchive build() {

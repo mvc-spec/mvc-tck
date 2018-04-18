@@ -72,7 +72,8 @@ public class WebArchiveBuilder {
 
         // empty JSF 2.2 descriptor
         WebFacesConfigDescriptor descriptor = Descriptors.create(WebFacesConfigDescriptor.class)
-                .addDefaultNamespaces();
+                .addDefaultNamespaces()
+                .version("2.2");
 
         archive.addAsWebInfResource(new StringAsset(descriptor.exportAsString()), "faces-config.xml");
         return this;

@@ -22,6 +22,9 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.facesconfig22.WebFacesConfigDescriptor;
+import org.jboss.shrinkwrap.descriptor.api.webapp31.WebAppDescriptor;
+
+import javax.faces.webapp.FacesServlet;
 
 public class WebArchiveBuilder {
 
@@ -68,7 +71,7 @@ public class WebArchiveBuilder {
         return this;
     }
 
-    public WebArchiveBuilder withEmptyFaceConfig() {
+    public WebArchiveBuilder withDefaultFaceConfig() {
 
         // empty JSF 2.2 descriptor
         WebFacesConfigDescriptor descriptor = Descriptors.create(WebFacesConfigDescriptor.class)
@@ -76,6 +79,26 @@ public class WebArchiveBuilder {
                 .version("2.2");
 
         archive.addAsWebInfResource(new StringAsset(descriptor.exportAsString()), "faces-config.xml");
+        return this;
+
+    }
+
+    public WebArchiveBuilder withDefaultWebXml() {
+
+        // Servlet descriptor with FacesServlet registered
+        WebAppDescriptor descriptor = Descriptors.create(WebAppDescriptor.class)
+                .addDefaultNamespaces()
+                .version("3.1")
+                .createServlet()
+                .servletName(FacesServlet.class.getSimpleName())
+                .servletClass(FacesServlet.class.getName())
+                .up()
+                .createServletMapping()
+                .servletName(FacesServlet.class.getSimpleName())
+                .urlPattern("*.xhtml")
+                .up();
+
+        archive.addAsWebInfResource(new StringAsset(descriptor.exportAsString()), "web.xml");
         return this;
 
     }

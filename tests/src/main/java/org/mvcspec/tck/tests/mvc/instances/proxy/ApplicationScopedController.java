@@ -18,7 +18,7 @@ package org.mvcspec.tck.tests.mvc.instances.proxy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.mvc.Models;
-import javax.mvc.annotation.Controller;
+import javax.mvc.Controller;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 

@@ -16,7 +16,7 @@
 package org.mvcspec.tck.tests.mvc.redirect.scope;
 
 import javax.inject.Named;
-import javax.mvc.annotation.RedirectScoped;
+import javax.mvc.RedirectScoped;
 import java.io.Serializable;
 
 @Named

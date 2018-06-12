@@ -15,8 +15,8 @@
  */
 package org.mvcspec.tck.tests.mvc.controller.returntype;
 
-import javax.mvc.annotation.Controller;
-import javax.mvc.annotation.View;
+import javax.mvc.Controller;
+import javax.mvc.View;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;

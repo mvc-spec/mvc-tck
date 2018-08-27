@@ -16,9 +16,9 @@
 package org.mvcspec.tck.tests.mvc.uri;
 
 import javax.inject.Inject;
-import javax.mvc.Models;
 import javax.mvc.Controller;
-import javax.mvc.uri.UriRef;
+import javax.mvc.Models;
+import javax.mvc.UriRef;
 import javax.ws.rs.GET;
 import javax.ws.rs.MatrixParam;
 import javax.ws.rs.Path;

@@ -24,8 +24,6 @@ import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.facesconfig22.WebFacesConfigDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.webapp31.WebAppDescriptor;
 
-import javax.faces.webapp.FacesServlet;
-
 public class WebArchiveBuilder {
 
     private WebArchive archive;
@@ -90,11 +88,11 @@ public class WebArchiveBuilder {
                 .addDefaultNamespaces()
                 .version("3.1")
                 .createServlet()
-                .servletName(FacesServlet.class.getSimpleName())
-                .servletClass(FacesServlet.class.getName())
+                .servletName("FacesServlet")
+                .servletClass("javax.faces.webapp.FacesServlet")
                 .up()
                 .createServletMapping()
-                .servletName(FacesServlet.class.getSimpleName())
+                .servletName("FacesServlet")
                 .urlPattern("*.xhtml")
                 .up();
 

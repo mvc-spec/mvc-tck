@@ -29,6 +29,12 @@ public class Sections {
     public static final String MVC_BUILDING_URIS = "mvc_uri";
 
     /*
+     * Chapter: Security
+     */
+    public static final String SECURITY_CSRF = "csrf";
+    public static final String SECURITY_XSS = "xss";
+
+    /*
      * Chapter: Events
      */
     public static final String EVENTS = "observers";

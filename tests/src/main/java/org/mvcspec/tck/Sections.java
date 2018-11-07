@@ -28,4 +28,9 @@ public class Sections {
     public static final String MVC_VIEWS = "views";
     public static final String MVC_BUILDING_URIS = "mvc_uri";
 
+    /*
+     * Chapter: Events
+     */
+    public static final String EVENTS = "observers";
+
 }

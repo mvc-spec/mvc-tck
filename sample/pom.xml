@@ -53,6 +53,12 @@
     <dependencies>
 
         <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.mvc-spec.tck</groupId>
             <artifactId>mvc-tck-api</artifactId>
         </dependency>

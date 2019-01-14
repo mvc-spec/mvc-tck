@@ -20,7 +20,7 @@ Start Glassfish:
     cd <GLASSFISH_HOME>/glassfish/bin/
     ./startserv
 
-Now execute the sample runner to run the tests against Ozark deployed to Glassfish:
+Now execute the sample runner to run the tests against Eclipse Krazo deployed to Glassfish:
 
     cd <TCK_HOME>/sample/
     mvn clean test

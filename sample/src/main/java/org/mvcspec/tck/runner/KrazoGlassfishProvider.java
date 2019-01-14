@@ -22,7 +22,7 @@ import org.mvcspec.tck.api.BaseArchiveProvider;
 
 import java.io.File;
 
-public class OzarkGlassfishProvider implements BaseArchiveProvider {
+public class KrazoGlassfishProvider implements BaseArchiveProvider {
 
     @Override
     public WebArchive getBaseArchive() {
@@ -30,9 +30,9 @@ public class OzarkGlassfishProvider implements BaseArchiveProvider {
         // TODO: Can we get the versions from the pom?
         File[] dependencies = Maven.resolver()
                 .resolve(
-                        "javax.mvc:javax.mvc-api:1.0-pr",
-                        "org.mvc-spec.ozark:ozark-core:1.0.0-m03",
-                        "org.mvc-spec.ozark:ozark-jersey:1.0.0-m03"
+                        "javax.mvc:javax.mvc-api:1.0-SNAPSHOT",
+                        "org.eclipse.krazo:krazo-core:1.0.0-SNAPSHOT",
+                        "org.eclipse.krazo:krazo-jersey:1.0.0-SNAPSHOT"
                 )
                 .withoutTransitivity()
                 .asFile();

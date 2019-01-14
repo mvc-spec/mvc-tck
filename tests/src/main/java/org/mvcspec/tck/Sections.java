@@ -31,8 +31,8 @@ public class Sections {
     /*
      * Chapter: Security
      */
-    public static final String SECURITY_CSRF = "csrf";
-    public static final String SECURITY_XSS = "xss";
+    public static final String SECURITY_CSRF = "cross-site-request-forgery";
+    public static final String SECURITY_XSS = "cross-site-scripting";
 
     /*
      * Chapter: Events

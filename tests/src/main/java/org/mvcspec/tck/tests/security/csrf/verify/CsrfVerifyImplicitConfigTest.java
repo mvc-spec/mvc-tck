@@ -63,7 +63,8 @@ public class CsrfVerifyImplicitConfigTest extends AbstractCsrfVerifyTest {
 
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = Sections.SECURITY_CSRF, id = "csrf-implicit")
+            @SpecAssertion(section = Sections.SECURITY_CSRF, id = "csrf-implicit"),
+            @SpecAssertion(section = Sections.SECURITY_CSRF, id = "csrf-default-mapper")
     })
     public void submitFormWithAnnotationAndInvalidToken() throws IOException {
 
@@ -92,7 +93,8 @@ public class CsrfVerifyImplicitConfigTest extends AbstractCsrfVerifyTest {
 
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = Sections.SECURITY_CSRF, id = "csrf-implicit")
+            @SpecAssertion(section = Sections.SECURITY_CSRF, id = "csrf-implicit"),
+            @SpecAssertion(section = Sections.SECURITY_CSRF, id = "csrf-default-mapper")
     })
     public void submitFormWithoutAnnotationAndInvalidToken() throws IOException {
 

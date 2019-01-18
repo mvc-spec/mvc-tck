@@ -38,4 +38,19 @@ public class MvcMatchers {
         };
     }
 
+    public static Matcher<String> isNotBlank() {
+        return new BaseMatcher<String>() {
+
+            @Override
+            public boolean matches(Object item) {
+                return item != null && !item.toString().trim().isEmpty();
+            }
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("to be not blank");
+            }
+        };
+    }
+
 }

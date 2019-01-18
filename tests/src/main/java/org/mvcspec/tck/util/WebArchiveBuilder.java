@@ -17,6 +17,7 @@ package org.mvcspec.tck.util;
 
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.Asset;
+import org.jboss.shrinkwrap.api.asset.ClassLoaderAsset;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
@@ -54,6 +55,13 @@ public class WebArchiveBuilder {
 
     public WebArchiveBuilder addView(String value, String name) {
         return this.addView(new StringAsset(value), name);
+    }
+
+    public WebArchiveBuilder addView(String path) {
+        return this.addView(
+                new ClassLoaderAsset("views/" + path),
+                path
+        );
     }
 
     public WebArchiveBuilder addBeansXml(String discoveryMode) {

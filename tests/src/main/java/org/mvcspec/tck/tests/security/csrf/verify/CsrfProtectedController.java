@@ -18,7 +18,6 @@ package org.mvcspec.tck.tests.security.csrf.verify;
 import javax.inject.Inject;
 import javax.mvc.Controller;
 import javax.mvc.Models;
-import javax.mvc.MvcContext;
 import javax.mvc.security.CsrfProtected;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -28,9 +27,6 @@ import javax.ws.rs.Path;
 @Controller
 @Path("csrf/verify")
 public class CsrfProtectedController {
-
-    @Inject
-    private MvcContext mvcContext;
 
     @Inject
     private Models models;

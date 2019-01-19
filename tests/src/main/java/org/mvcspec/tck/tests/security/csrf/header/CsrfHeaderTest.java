@@ -34,6 +34,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mvcspec.tck.Sections;
+import org.mvcspec.tck.tests.security.CsrfConstants;
 import org.mvcspec.tck.util.Archives;
 import org.mvcspec.tck.util.MvcMatchers;
 
@@ -138,13 +139,13 @@ public class CsrfHeaderTest {
         assertThat(formPage.getWebResponse().getStatusCode(), equalTo(200));
 
         // get token from header
-        String token = formPage.getWebResponse().getResponseHeaderValue("X-CSRF-TOKEN");
+        String token = formPage.getWebResponse().getResponseHeaderValue(CsrfConstants.CSRF_TOKEN_HEADER_NAME);
         assertThat(token, MvcMatchers.isNotBlank());
 
         // prepare post request with valid token
         WebRequest postRequest = new WebRequest(new URL(baseUrl.toString() + "mvc/csrf/header/process"));
         postRequest.setHttpMethod(HttpMethod.POST);
-        postRequest.setAdditionalHeader("X-CSRF-TOKEN", token);
+        postRequest.setAdditionalHeader(CsrfConstants.CSRF_TOKEN_HEADER_NAME, token);
         postRequest.setRequestParameters(Collections.singletonList(
                 new NameValuePair("name", "Charlie")
         ));
@@ -169,7 +170,7 @@ public class CsrfHeaderTest {
         // prepare post request with valid token
         WebRequest postRequest = new WebRequest(new URL(baseUrl.toString() + "mvc/csrf/header/process"));
         postRequest.setHttpMethod(HttpMethod.POST);
-        postRequest.setAdditionalHeader("X-CSRF-TOKEN", "INVALID-TOKEN");
+        postRequest.setAdditionalHeader(CsrfConstants.CSRF_TOKEN_HEADER_NAME, "INVALID-TOKEN");
         postRequest.setRequestParameters(Collections.singletonList(
                 new NameValuePair("name", "David")
         ));

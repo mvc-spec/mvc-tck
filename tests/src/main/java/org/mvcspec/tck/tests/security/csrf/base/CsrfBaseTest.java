@@ -29,6 +29,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mvcspec.tck.Sections;
+import org.mvcspec.tck.tests.security.CsrfConstants;
 import org.mvcspec.tck.util.Archives;
 import org.mvcspec.tck.util.MvcMatchers;
 
@@ -126,7 +127,7 @@ public class CsrfBaseTest {
         String hiddenFieldValue = hiddenField.getAttribute("value");
         assertThat(hiddenFieldValue, MvcMatchers.isNotBlank());
 
-        String headerValue = page.getWebResponse().getResponseHeaderValue("X-CSRF-TOKEN");
+        String headerValue = page.getWebResponse().getResponseHeaderValue(CsrfConstants.CSRF_TOKEN_HEADER_NAME);
         assertThat(headerValue, MvcMatchers.isNotBlank());
         assertThat(headerValue, CoreMatchers.equalTo(hiddenFieldValue));
 

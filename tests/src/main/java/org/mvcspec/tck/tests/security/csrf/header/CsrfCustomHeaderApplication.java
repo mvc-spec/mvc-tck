@@ -13,11 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.mvcspec.tck.tests.security;
+package org.mvcspec.tck.tests.security.csrf.header;
 
-public class CsrfConstants {
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
-    // TODO: Replace with Csrf.DEFAULT_CSRF_HEADER_NAME after updating spec version
-    public static final String CSRF_TOKEN_HEADER_NAME = "X-CSRF-TOKEN";
+@ApplicationPath("mvc")
+public class CsrfCustomHeaderApplication extends Application {
+
+    @Override
+    public Map<String, Object> getProperties() {
+        Map<String, Object> properties = new LinkedHashMap<>();
+        // TODO: Replace with actual constant from Csrf after updating the spec version
+        properties.put("javax.mvc.security.CsrfHeaderName", "X-CSRF-Custom-Header-Name");
+        return properties;
+    }
 
 }

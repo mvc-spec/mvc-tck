@@ -29,6 +29,11 @@ public class Sections {
     public static final String MVC_BUILDING_URIS = "mvc_uri";
 
     /*
+     * Chapter: Data Binding
+     */
+    public static final String BINDING_ANNOTATION = "mvc_binding_annotation";
+
+    /*
      * Chapter: Security
      */
     public static final String SECURITY_CSRF = "cross-site-request-forgery";

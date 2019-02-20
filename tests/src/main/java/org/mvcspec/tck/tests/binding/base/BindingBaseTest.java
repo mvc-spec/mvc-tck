@@ -66,7 +66,8 @@ public class BindingBaseTest {
 
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = Sections.BINDING_ANNOTATION, id = "mvc-binding")
+            @SpecAssertion(section = Sections.BINDING_ANNOTATION, id = "mvc-binding"),
+            @SpecAssertion(section = Sections.BINDING_ERROR_HANDLING, id = "inject-binding-result")
     })
     public void submitValidValue() throws IOException {
 
@@ -80,7 +81,9 @@ public class BindingBaseTest {
 
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = Sections.BINDING_ANNOTATION, id = "mvc-binding")
+            @SpecAssertion(section = Sections.BINDING_ANNOTATION, id = "mvc-binding"),
+            @SpecAssertion(section = Sections.BINDING_ERROR_HANDLING, id = "invoke-controller"),
+            @SpecAssertion(section = Sections.BINDING_ERROR_HANDLING, id = "inject-binding-result")
     })
     public void submitValidationError() throws IOException {
 
@@ -94,7 +97,9 @@ public class BindingBaseTest {
 
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = Sections.BINDING_ANNOTATION, id = "mvc-binding")
+            @SpecAssertion(section = Sections.BINDING_ANNOTATION, id = "mvc-binding"),
+            @SpecAssertion(section = Sections.BINDING_ERROR_HANDLING, id = "invoke-controller"),
+            @SpecAssertion(section = Sections.BINDING_ERROR_HANDLING, id = "inject-binding-result")
     })
     public void submitBindingError() throws IOException {
 
@@ -115,7 +120,7 @@ public class BindingBaseTest {
         ageInput.type(value);
 
         return formPage.getElementById("submit-btn").click();
-        
+
     }
 
 }

@@ -67,7 +67,7 @@ public class BindingBooleanTest {
 
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = Sections.BINDING_ANNOTATION, id = "convert-boolean")
+            @SpecAssertion(section = Sections.BINDING_BOOLEAN_TYPE, id = "convert-boolean")
     })
     public void submitBooleanAsTrue() throws IOException {
 
@@ -83,7 +83,7 @@ public class BindingBooleanTest {
 
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = Sections.BINDING_ANNOTATION, id = "convert-boolean")
+            @SpecAssertion(section = Sections.BINDING_BOOLEAN_TYPE, id = "convert-boolean")
     })
     public void submitBooleanAsOn() throws IOException {
 
@@ -99,7 +99,7 @@ public class BindingBooleanTest {
 
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = Sections.BINDING_ANNOTATION, id = "convert-boolean")
+            @SpecAssertion(section = Sections.BINDING_BOOLEAN_TYPE, id = "convert-boolean")
     })
     public void submitBooleanAsFalse() throws IOException {
 
@@ -115,7 +115,7 @@ public class BindingBooleanTest {
 
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = Sections.BINDING_ANNOTATION, id = "convert-boolean")
+            @SpecAssertion(section = Sections.BINDING_BOOLEAN_TYPE, id = "convert-boolean")
     })
     public void submitBooleanAsFoobar() throws IOException {
 
@@ -131,7 +131,7 @@ public class BindingBooleanTest {
 
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = Sections.BINDING_ANNOTATION, id = "convert-empty-boolean")
+            @SpecAssertion(section = Sections.BINDING_BOOLEAN_TYPE, id = "convert-empty-boolean")
     })
     public void submitBooleanAsEmpty() throws IOException {
 

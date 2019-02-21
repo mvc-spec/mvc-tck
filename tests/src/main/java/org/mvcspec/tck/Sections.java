@@ -34,6 +34,7 @@ public class Sections {
     public static final String BINDING_ANNOTATION = "mvc_binding_annotation";
     public static final String BINDING_ERROR_HANDLING = "error_handling_bindingresult";
     public static final String BINDING_BOOLEAN_TYPE = "boolean_type";
+    public static final String BINDING_NUMERIC_TYPE = "numeric_types";
 
     /*
      * Chapter: Security

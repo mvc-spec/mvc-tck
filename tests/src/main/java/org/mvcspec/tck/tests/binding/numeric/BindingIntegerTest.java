@@ -52,7 +52,7 @@ public class BindingIntegerTest extends AbstractNumericTest {
 
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = Sections.BINDING_BOOLEAN_TYPE, id = "convert-numeric")
+            @SpecAssertion(section = Sections.BINDING_NUMERIC_TYPE, id = "convert-numeric")
     })
     public void submitValidInteger() throws IOException {
 
@@ -68,7 +68,7 @@ public class BindingIntegerTest extends AbstractNumericTest {
 
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = Sections.BINDING_BOOLEAN_TYPE, id = "convert-empty-numeric")
+            @SpecAssertion(section = Sections.BINDING_NUMERIC_TYPE, id = "convert-empty-numeric")
     })
     public void submitEmptyInteger() throws IOException {
 

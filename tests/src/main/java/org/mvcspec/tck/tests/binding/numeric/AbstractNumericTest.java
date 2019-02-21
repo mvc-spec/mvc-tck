@@ -15,6 +15,7 @@
  */
 package org.mvcspec.tck.tests.binding.numeric;
 
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -41,7 +42,7 @@ public abstract class AbstractNumericTest {
         webClient.getOptions().setRedirectEnabled(false);
     }
 
-    HtmlPage submitForm(String path, String value) throws IOException {
+    Page submitForm(String path, String value) throws IOException {
 
         HtmlPage formPage = webClient.getPage(baseUrl.toString() + "mvc/" + path);
         assertThat(formPage.getWebResponse().getStatusCode(), equalTo(200));

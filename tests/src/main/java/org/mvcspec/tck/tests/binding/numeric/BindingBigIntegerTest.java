@@ -15,7 +15,7 @@
  */
 package org.mvcspec.tck.tests.binding.numeric;
 
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.Page;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -55,7 +55,7 @@ public class BindingBigIntegerTest extends AbstractNumericTest {
     })
     public void submitValidBigInteger() throws IOException {
 
-        HtmlPage resultPage = submitForm("binding/numeric", "1.234");
+        Page resultPage = submitForm("binding/numeric", "1.234");
 
         assertThat(resultPage.getWebResponse().getStatusCode(), equalTo(200));
         assertThat(resultPage.getWebResponse().getContentAsString(), containsString("Object: [1234]"));
@@ -68,7 +68,7 @@ public class BindingBigIntegerTest extends AbstractNumericTest {
     })
     public void submitEmptyBigInteger() throws IOException {
 
-        HtmlPage resultPage = submitForm("binding/numeric", "");
+        Page resultPage = submitForm("binding/numeric", "");
 
         assertThat(resultPage.getWebResponse().getStatusCode(), equalTo(200));
         assertThat(resultPage.getWebResponse().getContentAsString(), containsString("Object: [null]"));

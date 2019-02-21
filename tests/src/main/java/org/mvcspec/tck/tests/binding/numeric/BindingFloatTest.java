@@ -15,7 +15,7 @@
  */
 package org.mvcspec.tck.tests.binding.numeric;
 
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.Page;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -56,7 +56,7 @@ public class BindingFloatTest extends AbstractNumericTest {
     })
     public void submitValidFloat() throws IOException {
 
-        HtmlPage resultPage = submitForm("binding/numeric", "1.234,56");
+        Page resultPage = submitForm("binding/numeric", "1.234,56");
 
         assertThat(resultPage.getWebResponse().getStatusCode(), equalTo(200));
         assertThat(resultPage.getWebResponse().getContentAsString(), allOf(
@@ -72,7 +72,7 @@ public class BindingFloatTest extends AbstractNumericTest {
     })
     public void submitEmptyFloat() throws IOException {
 
-        HtmlPage resultPage = submitForm("binding/numeric", "");
+        Page resultPage = submitForm("binding/numeric", "");
 
         assertThat(resultPage.getWebResponse().getStatusCode(), equalTo(200));
         assertThat(resultPage.getWebResponse().getContentAsString(), allOf(

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2017 Christian Kaltepoth
+ * Copyright © 2017, 2019 Christian Kaltepoth
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,5 +48,10 @@ public class Sections {
      * Chapter: Events
      */
     public static final String EVENTS = "observers";
+
+    /*
+     * Chapter: Applications
+     */
+    public static final String APPLICATION_MVC_APPS = "mvc_applications";
 
 }

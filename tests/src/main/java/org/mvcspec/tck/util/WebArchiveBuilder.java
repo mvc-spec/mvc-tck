@@ -1,5 +1,5 @@
 /*
- * Copyright © 2017 Christian Kaltepoth
+ * Copyright © 2017, 2019 Christian Kaltepoth
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -106,9 +106,13 @@ public class WebArchiveBuilder {
                 .urlPattern("*.xhtml")
                 .up();
 
+        return withWebXml(descriptor);
+
+    }
+
+    public WebArchiveBuilder withWebXml(WebAppDescriptor descriptor) {
         archive.addAsWebInfResource(new StringAsset(descriptor.exportAsString()), "web.xml");
         return this;
-
     }
 
     public WebArchive build() {

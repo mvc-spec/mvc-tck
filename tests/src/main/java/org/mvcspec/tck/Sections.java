@@ -53,5 +53,6 @@ public class Sections {
      * Chapter: Applications
      */
     public static final String APPLICATION_MVC_APPS = "mvc_applications";
+    public static final String APPLICATION_MVC_CONTEXT = "mvc_context";
 
 }

@@ -59,5 +59,6 @@ public class Sections {
      * Chapter: View Engines
      */
     public static final String VIEW_ENGINE_INTRO = "view_engines_introduction";
+    public static final String VIEW_ENGINE_ALGORITHM = "selection_algorithm";
 
 }

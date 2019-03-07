@@ -69,7 +69,8 @@ public class ViewEngineBaseTest {
 
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = Sections.VIEW_ENGINE_INTRO, id = "jsp-facelets")
+            @SpecAssertion(section = Sections.VIEW_ENGINE_INTRO, id = "jsp-facelets"),
+            @SpecAssertion(section = Sections.VIEW_ENGINE_ALGORITHM, id = "models-binding")
     })
     public void viewEngineJsp() throws IOException {
 
@@ -84,7 +85,8 @@ public class ViewEngineBaseTest {
 
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = Sections.VIEW_ENGINE_INTRO, id = "jsp-facelets")
+            @SpecAssertion(section = Sections.VIEW_ENGINE_INTRO, id = "jsp-facelets"),
+            @SpecAssertion(section = Sections.VIEW_ENGINE_ALGORITHM, id = "models-binding")
     })
     public void viewEngineFacelets() throws IOException {
 

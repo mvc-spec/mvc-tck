@@ -55,4 +55,9 @@ public class Sections {
     public static final String APPLICATION_MVC_APPS = "mvc_applications";
     public static final String APPLICATION_MVC_CONTEXT = "mvc_context";
 
+    /*
+     * Chapter: View Engines
+     */
+    public static final String VIEW_ENGINE_INTRO = "view_engines_introduction";
+
 }

@@ -61,4 +61,11 @@ public class Sections {
     public static final String VIEW_ENGINE_INTRO = "view_engines_introduction";
     public static final String VIEW_ENGINE_ALGORITHM = "selection_algorithm";
 
+    /*
+     * Chapter: Internationalization
+     */
+    public static final String I18N_INTRODUCTION = "i18n_introduction";
+    public static final String I18N_RESOLVING_ALGORITHM = "i18n_resolving_algorithm";
+    public static final String I18N_DEFAULT_RESOLVER = "i18n_default_resolver";
+
 }

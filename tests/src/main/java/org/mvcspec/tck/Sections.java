@@ -54,6 +54,7 @@ public class Sections {
      */
     public static final String APPLICATION_MVC_APPS = "mvc_applications";
     public static final String APPLICATION_MVC_CONTEXT = "mvc_context";
+    public static final String APPLICATION_INHERITANCE = "annotation_inheritance";
 
     /*
      * Chapter: View Engines

@@ -26,3 +26,16 @@ Now execute the sample runner to run the tests against Eclipse Krazo deployed to
     mvn clean test
     
 Of course all the tests should pass. :-)
+
+## Run the signature tests
+
+Download the 3.0 dev version of the SigTest tool here:
+
+    https://download.java.net/sigtest/download.html
+
+Now run the tests for a specific package with a command similar to this: 
+
+    java -jar ${SIGTEST_HOME}/lib/sigtestdev.jar SignatureTest -Static \
+      -FileName ${HOME}/.m2/repository/org/mvc-spec/tck/mvc-tck-sigtest/1.0-SNAPSHOT/mvc-tck-sigtest-1.0-SNAPSHOT.sigfile \
+      -Classpath ${JAVA_HOME}/jre/lib/rt.jar:${HOME}/.m2/repository/javax/mvc/javax.mvc-api/1.0-SNAPSHOT/javax.mvc-api-1.0-SNAPSHOT.jar:${HOME}/.m2/repository/javax/javaee-web-api/8.0/javaee-web-api-8.0.jar \
+      -Package javax.mvc

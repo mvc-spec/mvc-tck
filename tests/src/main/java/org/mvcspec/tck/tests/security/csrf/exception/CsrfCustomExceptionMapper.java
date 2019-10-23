@@ -19,6 +19,7 @@ package org.mvcspec.tck.tests.security.csrf.exception;
 
 
 import javax.mvc.security.CsrfValidationException;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
@@ -29,7 +30,10 @@ public class CsrfCustomExceptionMapper implements ExceptionMapper<CsrfValidation
     @Override
     public Response toResponse(CsrfValidationException exception) {
 
-        return Response.status(499).build();
+        return Response.status(499)
+                .type(MediaType.TEXT_PLAIN_TYPE)
+                .entity("Custom handler for CsrfValidationException")
+                .build();
 
     }
 

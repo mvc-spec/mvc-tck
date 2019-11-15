@@ -27,18 +27,18 @@ public class KrazoGlassfishProvider implements BaseArchiveProvider {
     @Override
     public WebArchive getBaseArchive() {
 
-        // TODO: Can we get the versions from the pom?
         File[] dependencies = Maven.resolver()
                 .resolve(
-                        "javax.mvc:javax.mvc-api:1.0-SNAPSHOT",
-                        "org.eclipse.krazo:krazo-core:1.0.0-SNAPSHOT",
-                        "org.eclipse.krazo:krazo-jersey:1.0.0-SNAPSHOT"
+                        "javax.mvc:javax.mvc-api:1.0-pfd",
+                        "org.eclipse.krazo:krazo-core:1.0.0-Beta1",
+                        "org.eclipse.krazo:krazo-jersey:1.0.0-Beta1"
                 )
                 .withoutTransitivity()
                 .asFile();
 
         return ShrinkWrap.create(WebArchive.class)
                 .addAsLibraries(dependencies);
+
     }
 
 }

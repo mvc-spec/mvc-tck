@@ -1,0 +1,178 @@
+////
+
+    Copyright © 2019 Christian Kaltepoth
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+    SPDX-License-Identifier: Apache-2.0
+
+////
+[[running_tck_tests]]
+== Running the TCK tests
+
+This chapter describes how to run and configure the TCK test suite against a given MVC 1.0 implementation in a given Java EE container.
+The testsuite uses http://arquillian.org/[Arquillian] to execute tests against real Java EE containers.
+It is strongly recommended making yourself familiar with the Arquillian documentation.
+It will give you a deeper understanding of the different parts described in the following sections.
+
+=== The TCK runner template
+
+The TCK contains a directory `sample` which contains an example project for running the TCK and
+which should be used as a template for creating new projects.
+This sample project is using the reference implementation Eclipse Krazo and runs the TCK against Eclipse Glassfish 5.1.0.
+
+The project is using Apache Maven is contains just three files:
+
+`pom.xml`::
+  The Maven POM file imports the TCK BOM, declares all required dependencies and configure the Maven Surefire Plugin
+  to run the tests defined by the MVC 1.0 TCK.
+
+`arquillian.xml`::
+  This file configures Arquillian to deploy the web applications which are used by the TCK tests to Eclipse Glassfish.
+
+`KrazoGlassfishProvider.java`::
+  This Java class is an implementation of the `BaseArchiveProvider` interface which is part of the TCK.
+  The responsibility of the archive provider is to create a base Shrinkwrap archive which is used by all TCK
+  tests. The archive produced by the provider depends on the specific environment you are running the tests
+  against. As MVC 1.0 API and implementation is not provided by Eclipse Glassfish, the `KrazoGlassfishProvider`
+  builds and archive which adds the API JAR and Eclipse Krazo to the `/WEB-INF/lib` directory of the archive so
+  that both are deployed as part of the web application.
+
+Running the TCK is simple. First you have to download, unpack and start Eclipse Glassfish 5.1.0.
+Then just execute the following command in the sample project folder to run the TCK against this Eclipse Glassfish instance:
+
+[source,sh]
+----
+mvn verify
+----
+
+After a few minutes you should get an output like this:
+
+----
+[...]
+Running org.mvcspec.tck.tests.mvc.controller.mediatype.MediaTypeTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.109 sec - in org.mvcspec.tck.tests.mvc.controller.mediatype.MediaTypeTest
+Running org.mvcspec.tck.tests.mvc.controller.inject.InjectParamsTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.047 sec - in org.mvcspec.tck.tests.mvc.controller.inject.InjectParamsTest
+
+Results :
+
+Tests run: 132, Failures: 0, Errors: 0, Skipped: 0
+
+[...]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 01:02 min
+[INFO] Finished at: 2019-11-15T08:21:54+01:00
+[INFO] ------------------------------------------------------------------------
+----
+
+Congratulations! You just ran the MVC 1.0 TCK!
+
+=== Adjusting the template project
+
+If you want to run the MVC 1.0 TCK against a different environment,
+you should start from the template project and adjust it like described in the following sections.
+
+=== Update Arquillian configuration
+
+If you want to run the TCK against a different container, you will typically have to adjust the Arquillian configuration.
+In most cases this is really easy, because Arquillian already supports a wide range of containers.
+However, it is strongly recommended having a deeper look at the
+http://arquillian.org/docs/[Arquillian documentation] to learn more.
+
+Generally, you will have to follow these steps:
+
+* Replace the `arquillian-glassfish-remote-3.1` Arquillian adapter with the adapter for your environment
+  in the `pom.xml` file.
+* Then adjust the `arquillian.xml` file as described in the Arquillian adapter documentation.
+  This typically includes adjusting port numbers and providing credentials for performing remote deployments.
+
+As mentioned above, the details depend on the specific environment.
+
+=== Provide a custom BaseArchiveProvider
+
+The `BaseArchiveProvider` is used by the TCK to create a base web application archive capable of running MVC 1.0
+application in the specific target environment. The TCK then just adds controllers, views and other
+artifacts to that base archive and deploys it to the target container.
+
+As the template project runs the TCK against Eclipse Glassfish 5.1.0 which doesn't provide support for MVC 1.0
+out of the box, the corresponding archive provider creates a web application archive which includes both
+the MVC 1.0 API JAR and the reference implementation Eclipse Krazo in `/WEB-INF/lib`.
+
+The default implementation provided with the template project looks like this:
+
+[source,java,subs="attributes"]
+----
+public class KrazoGlassfishProvider implements BaseArchiveProvider {
+
+    @Override
+    public WebArchive getBaseArchive() {
+
+        File[] dependencies = Maven.resolver()
+                .resolve(
+                        "javax.mvc:javax.mvc-api:{mvc-api.version}",
+                        "org.eclipse.krazo:krazo-core:{krazo-version}",
+                        "org.eclipse.krazo:krazo-jersey:{krazo-version}"
+                )
+                .withoutTransitivity()
+                .asFile();
+
+        return ShrinkWrap.create(WebArchive.class)
+                .addAsLibraries(dependencies);
+
+    }
+
+}
+----
+
+You will have to create a similar class which does the same for the environment you want to run the test against.
+
+If your container provides MVC 1.0 support out of the box, you would have to create an implementation which returns
+an empty archive like this:
+
+[source,java]
+----
+public class EmptyArchiveProvider implements BaseArchiveProvider {
+
+    @Override
+    public WebArchive getBaseArchive() {
+        return ShrinkWrap.create(WebArchive.class);
+    }
+
+}
+----
+
+The TCK uses a Java system property to learn about the implementation that should be used for building archives.
+This system property is configured using the Maven Surefire Plugin configuration in your `pom.xml`.
+The relevant section in the template project looks like this:
+
+[source,xml]
+----
+<plugin>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>2.19.1</version>
+    <configuration>
+        <dependenciesToScan>org.mvc-spec.tck:mvc-tck-tests</dependenciesToScan>
+        <systemProperties>
+            <org.mvcspec.tck.api.BaseArchiveProvider>
+                org.mvcspec.tck.runner.KrazoGlassfishProvider
+            </org.mvcspec.tck.api.BaseArchiveProvider>
+        </systemProperties>
+    </configuration>
+</plugin>
+----
+
+If you provide a custom implementation of `ArchiveBaseProvider`, you will have to adjust the configuration
+and change the FQCN if the implementation class.

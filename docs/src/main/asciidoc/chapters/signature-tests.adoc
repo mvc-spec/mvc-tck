@@ -1,0 +1,150 @@
+////
+
+    Copyright © 2019 Christian Kaltepoth
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+    SPDX-License-Identifier: Apache-2.0
+
+////
+[[running_sig_tests]]
+== Running the signature tests
+
+One of the requirements of an implementation passing the TCK is for it to pass the MVC 1.0 signature test.
+This section describes how to run it against your implementation.
+
+=== Obtaining the sigtest tool
+
+To run the signature tests against an implementation, you will need the Sigtest tool.
+You can download the latest version here:
+
+https://download.java.net/sigtest/download.html
+
+The process has been tested against `sigtest-3_0-dev-bin-b09-24_apr_2013.zip`.
+
+Download the corresponding ZIP file and unpack it to some location:
+
+[source,sh]
+----
+mkdir ${HOME}/sigtest && cd $_
+wget http://download.java.net/sigtest/3.0/PreRel/sigtest-3_0-dev-bin-b09-24_apr_2013.zip
+unzip sigtest-3_0-dev-bin-b09-24_apr_2013.zip
+----
+
+Now set the following environment variables:
+
+`SIGTEST_HOME`::
+  Directory of the just downloaded Sigtest tool.
+
+`JAVA_HOME`::
+  Location of the JDK you want to use for the test.
+
+If you use the installation directory from the example above:
+
+[source,sh]
+----
+export SIGTEST_HOME=${HOME}/sigtest/sigtest-3.0
+export JAVA_HOME=/lib/jvm/java-1.8.0
+----
+
+=== Preparing the environment
+
+To run the signature tests, you will need obtain three files. To simplify the invocation of the Sigtest tool,
+it is recommended to place all files in the same directory and to run the Sigtest from this directory:
+
+[source,sh]
+----
+mkdir ${HOME}/sigtest/mvc/ && cd $_
+----
+
+First you will need to get the Java EE 8 API JAR. You can download this directly from Maven Central:
+
+[source,sh]
+----
+wget https://repo1.maven.org/maven2/javax/javaee-api/8.0/javaee-api-8.0.jar
+----
+
+Next, you will need the implementation JAR of the MVC 1.0 API.
+In this example we will simply use the official API JAR.
+
+[source,sh,subs="attributes"]
+----
+wget https://repo1.maven.org/maven2/javax/mvc/javax.mvc-api/{mvc-api-version}/javax.mvc-api-{mvc-api-version}.jar
+----
+
+Finally you will need the `.sigtest` definition file, which you can also get from Maven Central:
+
+[source,sh,subs="attributes"]
+----
+wget https://repo1.maven.org/maven2/org/mvc-spec/tck/mvc-tck-sigtest/{tck-version}/mvc-tck-sigtest-{tck-version}.sigfile
+----
+
+Now you are ready to run the signature tests.
+
+=== Running the signature test
+
+[source,sh,subs="attributes"]
+----
+${JAVA_HOME}/bin/java -jar ${SIGTEST_HOME}/lib/sigtestdev.jar SignatureTest \
+  -Classpath "${JAVA_HOME}/jre/lib/rt.jar:./javaee-api-8.0.jar:./javax.mvc-api-{mvc-api-version}.jar" \
+  -Package javax.mvc \
+  -FileName ./mvc-tck-sigtest-{tck-version}.sigfile \
+  -static
+----
+
+If the test is successful, you should see an output like this:
+
+----
+SignatureTest report
+Base version: 1.0-SNAPSHOT
+Tested version:
+Check mode: src [throws normalized]
+Constant checking: on
+
+
+STATUS:Passed.
+----
+
+=== Forcing a signature test failure
+
+To verify that the signature test works correctly, you can modify the signature file:
+
+[source,plain]
+----
+CLSS public abstract interface javax.mvc.Models
+intf java.lang.Iterable<java.lang.String>
+meth public abstract <%0 extends java.lang.Object> {%%0} get(java.lang.String,java.lang.Class<{%%0}>)
+meth public abstract java.lang.Object get(java.lang.String)
+meth public abstract java.util.Map<java.lang.String,java.lang.Object> asMap()
+meth public abstract javax.mvc.Models put(java.lang.String,java.lang.Object)
+----
+
+You can for example delete the line containing the definition of the `get` method.
+Now run the signature test again. The check should fail like this:
+
+----
+SignatureTest report
+Base version: 1.0-SNAPSHOT
+Tested version:
+Check mode: src [throws normalized]
+Constant checking: on
+
+
+Added Methods
+-------------
+
+javax.mvc.Models:   method public abstract java.lang.Object javax.mvc.Models.get(java.lang.String)
+
+
+STATUS:Failed.1 errors
+----

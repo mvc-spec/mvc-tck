@@ -73,6 +73,7 @@
         <module>api</module>
         <module>tests</module>
         <module>sigtest</module>
+        <module>docs</module>
     </modules>
 
     <developers>

@@ -1,0 +1,91 @@
+////
+
+    Copyright © 2019 Christian Kaltepoth
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+    SPDX-License-Identifier: Apache-2.0
+
+////
+== Introduction
+
+This guide describes how to download, install and run the Technology Compatibility Kit (TCK) for the
+Model-View-Controller Specification 1.0.
+
+=== TCK Primer
+
+A TCK, or Technology Compatibility Kit, is one of the three required pieces for any JSR
+(the other two being the specification document and the reference implementation).
+The TCK is a set of tools and tests to verify that an implementation of the technology conforms to the specification.
+The tests are the primary component, but the tools serve an equally critical role of providing a
+framework and/or set of SPIs for executing the tests.
+
+The tests in the TCK are derived from assertions in the written specification document.
+The assertions are itemized in an XML document, where they each get assigned a
+unique identifier, and materialize as a suite of automated tests that collectively validate whether
+an implementation complies with the aforementioned assertions, and in turn the specification.
+For a particular implementation to be certified, all the required tests must pass (meaning the
+provided test suite must be run unmodified).
+
+A TCK is entirely implementation agnostic. It should validate assertions by consulting the
+specification’s public API.
+
+=== Compatibility Testing
+
+The goal of any specification is to eliminate portability problems so long as the program which
+uses the implementation also conforms to the rules laid out in the specification.
+
+Executing the TCK is a form of compatibility testing. It’s important to understand that
+compatibility testing is distinctly different from product testing. The TCK is not concerned with
+robustness, performance or ease of use, and therefore cannot vouch for how well an
+implementation meets these criteria. What a TCK can do is to ensure the exactness of an
+implementation as it relates to the specification.
+
+Compatibility testing of any feature relies on both a complete specification and a complete
+reference implementation. The reference implementation demonstrates how each test can be
+passed and provides additional context to the implementor during development for the
+corresponding assertion.
+
+=== About the MVC TCK
+
+The MVC 1.0 TCK is designed as a portable, configurable and automated test suite for verifying the compatibility
+of an implementation of the Model-View-Controller Specification.
+The test suite is built atop JUnit and provides a series of extensions that allow runtime packaging
+and deployment of Java EE artifacts for in-container testing (Arquillian).
+
+Each test class in the suite acts as a deployable unit. The deployable units, or artifacts, are
+defined in a declarative way using annotations.
+
+=== TCK Components
+
+The MVC 1.0 TCK includes the following components:
+
+* **The test suite**, which is a collection of JUnit tests and supplemental resources
+that configure the runtime and other software components.
+
+* **The TCK audit** (`tck-audit.xml`) used to list out the assertions identified in the
+MVC 1.0 specification. It matches the assertions to test cases in the test suite by
+unique identifier and produces a coverage report. The audit document is provided
+along with the TCK. Each assertion is defined with a reference to a chapter,
+section and paragraph from the specification document, making it easy for the
+implementor to locate the language in the specification document that
+supports the feature being tested.
+
+* A **setup example** demonstrating Maven and Ant setups to run the TCK test suite.
+
+=== Passing the MVC 1.0 TCK
+
+In order to pass the MVC 1.0 TCK, you need to:
+
+* Pass the MVC 1.0 signature tests (see <<running_sig_tests>>) asserting the correctness of the MVC 1.0 API used.
+* Run and pass the test suite (see <<running_tck_tests>>).

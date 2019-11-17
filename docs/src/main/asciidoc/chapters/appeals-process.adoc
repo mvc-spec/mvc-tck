@@ -1,0 +1,71 @@
+////
+
+    Copyright © 2019 Christian Kaltepoth
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+    SPDX-License-Identifier: Apache-2.0
+
+////
+== Appeals Process
+
+The MVC 1.0 has been created with maximum care. However, it's reasonable to assume that an implementor may
+discover new and/or better ways to validate the assertions. This chapter covers the appeals process,
+defined by the MVC 1.0 Specification Leads, which allows implementors of the MVC 1.0 specification to
+challenge one or more tests defined by the MVC 1.0 TCK.
+
+The appeals process identifies who can make challenges to the TCK, what challenges to the TCK may be submitted,
+how these challenges are submitted, how and by whom challenges are addressed
+and how accepted challenges to the TCK are managed.
+
+=== Who can make challenges to the TCK?
+
+Everybody may submit an appeal to challenge one or more tests in the MVC 1.0 TCK.
+In fact, the Specification Leads and members of the MVC 1.0 Expert Group encourage this level of participation.
+
+=== What challenges to the TCK may be submitted?
+
+Any test case (i.e. `@Test` method), test case configuration (i.e. `@Deployment`), test entities,
+annotations and other resources may be challenged by an appeal.
+
+What is generally not challengeable are the assertions made by the specification. The specification document
+is controlled by a separate process and challenges to it should be handled through the MVC 1.0 Expert Group.
+
+=== How these challenges are submitted?
+
+To submit a challenge, a new issue should be created in the https://github.com/mvc-spec/mvc-tck[mvc-tck] GitHub repository.
+The appellant should select the *TCK Challenge* template and answer the following questions:
+
+* The relevant specification version and section number(s)
+* The coordinates of the challenged test(s)
+* The exact TCK and exclude list versions
+* The implementation being tested, including name and company
+* The full test name
+* A full description of why the test is invalid and what the correct behavior is believed to be
+* Any supporting material; debug logs, test output, test logs, run scripts, etc.
+
+To submit an issue in the GitHub repository, you must have a (free) GitHub account.
+You can create a GitHub account using the https://github.com/join[on-line registration].
+
+=== How and by whom challenges are addressed?
+
+The challenges will be addressed in a timely fashion by the MVC 1.0 TCK Project Lead,
+as designated by Specification Lead, or his/her designate.
+The appellant can also monitor the process by watching the issue filed.
+
+=== How accepted challenges to the TCK are managed?
+
+Accepted challenges will be acknowledged via the filed issue's comment section.
+Communication between the MVC 1.0 TCK Project Lead and the appellant will take place via the issue comments.
+The issue's status will be set to "Closed" when the TCK project lead believes the issue to be resolved.
+The appellant should, within 30 days, comment on the issue if they do not believe the issue to be resolved.

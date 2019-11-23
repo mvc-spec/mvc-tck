@@ -57,6 +57,9 @@ export SIGTEST_HOME=${HOME}/sigtest/sigtest-3.0
 export JAVA_HOME=/lib/jvm/java-1.8.0
 ----
 
+NOTE: It is strongly recommended to use Java 8 for running the signature tests, because the Sigtest tool
+doesn't work well with newer Java versions.
+
 === Preparing the environment
 
 To run the signature tests, you will need obtain three files. To simplify the invocation of the Sigtest tool,

@@ -122,7 +122,7 @@ public class KrazoGlassfishProvider implements BaseArchiveProvider {
 
         File[] dependencies = Maven.resolver()
                 .resolve(
-                        "javax.mvc:javax.mvc-api:{mvc-api.version}",
+                        "javax.mvc:javax.mvc-api:{mvc-api-version}",
                         "org.eclipse.krazo:krazo-core:{krazo-version}",
                         "org.eclipse.krazo:krazo-jersey:{krazo-version}"
                 )

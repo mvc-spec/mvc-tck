@@ -29,9 +29,9 @@ public class KrazoGlassfishProvider implements BaseArchiveProvider {
 
         File[] dependencies = Maven.resolver()
                 .resolve(
-                        "javax.mvc:javax.mvc-api:1.0-pfd",
-                        "org.eclipse.krazo:krazo-core:1.0.0-Beta1",
-                        "org.eclipse.krazo:krazo-jersey:1.0.0-Beta1"
+                        "javax.mvc:javax.mvc-api:1.0.0-RC1",
+                        "org.eclipse.krazo:krazo-core:1.0.0-RC1",
+                        "org.eclipse.krazo:krazo-jersey:1.0.0-RC1"
                 )
                 .withoutTransitivity()
                 .asFile();

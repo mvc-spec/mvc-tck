@@ -33,6 +33,10 @@
     <name>JSR 371 TCK - Documentation</name>
     <description>Technology Compatibility Kit for JSR 371</description>
 
+    <properties>
+        <krazo.version>1.0.0-RC1</krazo.version>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -61,7 +65,7 @@
                                 <linkcss>false</linkcss>
                                 <tck-version>${project.version}</tck-version>
                                 <mvc-api-version>${mvc-api.version}</mvc-api-version>
-                                <krazo-version>1.0.0</krazo-version>
+                                <krazo-version>${krazo.version}</krazo-version>
                             </attributes>
                             <outputFile>${project.build.directory}/generated-docs/index.html</outputFile>
                         </configuration>
@@ -86,7 +90,7 @@
                                 <toc>true</toc>
                                 <tck-version>${project.version}</tck-version>
                                 <mvc-api-version>${mvc-api.version}</mvc-api-version>
-                                <krazo-version>1.0.0</krazo-version>
+                                <krazo-version>${krazo.version}</krazo-version>
                             </attributes>
                         </configuration>
                     </execution>

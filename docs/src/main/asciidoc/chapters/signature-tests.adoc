@@ -107,9 +107,10 @@ ${JAVA_HOME}/bin/java -jar ${SIGTEST_HOME}/lib/sigtestdev.jar SignatureTest \
 
 If the test is successful, you should see an output like this:
 
+[subs="attributes"]
 ----
 SignatureTest report
-Base version: 1.0-SNAPSHOT
+Base version: {tck-version}
 Tested version:
 Check mode: src [throws normalized]
 Constant checking: on
@@ -135,9 +136,10 @@ meth public abstract javax.mvc.Models put(java.lang.String,java.lang.Object)
 You can for example delete the line containing the definition of the `get` method.
 Now run the signature test again. The check should fail like this:
 
+[subs="attributes"]
 ----
 SignatureTest report
-Base version: 1.0-SNAPSHOT
+Base version: {tck-version}
 Tested version:
 Check mode: src [throws normalized]
 Constant checking: on

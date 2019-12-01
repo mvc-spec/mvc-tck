@@ -22,7 +22,7 @@
 
     <groupId>org.mvc-spec.tck</groupId>
     <artifactId>mvc-tck-sample</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-RC1</version>
 
     <name>JSR 371 TCK - Sample Runner</name>
     <description>Technology Compatibility Kit for JSR 371</description>

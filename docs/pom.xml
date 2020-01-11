@@ -34,7 +34,7 @@
     <description>Technology Compatibility Kit for JSR 371</description>
 
     <properties>
-        <krazo.version>1.0.0-RC1</krazo.version>
+        <krazo.version>1.0.0</krazo.version>
     </properties>
 
     <build>
